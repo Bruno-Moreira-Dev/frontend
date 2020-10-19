@@ -17,6 +17,9 @@
                       [(ngModel)]="form.email"
                       required
                   >
+
+                  <!-- <span class="text-danger" [hidden]="!error.email">{{ error.email }}</span> -->
+
                 </div>
               </div>
 
@@ -32,6 +35,9 @@
                       [(ngModel)]="form.password"
                       required
                   >
+
+                  <!-- <span class="text-danger" [hidden]="!error.password">{{ error.password }}</span> -->
+
                 </div>
               </div>
 
@@ -47,6 +53,9 @@
                       [(ngModel)]="form.password_confirmation"
                       required
                   >
+
+                  <!-- <span class="text-danger" [hidden]="!error.password_confirmation">{{ error.password_confirmation }}</span> -->
+
                 </div>
               </div>
 

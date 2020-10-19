@@ -18,6 +18,10 @@ import { AuthService } from './Services/auth.service';
 import { TokenService } from './Services/token.service';
 import { BeforeLoginService } from './Services/before-login.service';
 import { AfterLoginService } from './Services/after-login.service';
+import { TokenInterceptorService } from './security/token-interceptor.service';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './security/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,8 +46,10 @@ import { AfterLoginService } from './Services/after-login.service';
     TokenService,
     BeforeLoginService,
     AfterLoginService,
+    TokenInterceptorService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-    SnotifyService
+    SnotifyService,
   ],
   bootstrap: [AppComponent]
 })

@@ -11,6 +11,11 @@ import { AfterLoginService } from './Services/after-login.service';
 
 const appRoutes: Routes = [
   {
+    path: '',
+    component: LoginComponent,
+    canActivate: [BeforeLoginService]
+  },
+  {
     path: 'login',
     component: LoginComponent,
     canActivate: [BeforeLoginService]

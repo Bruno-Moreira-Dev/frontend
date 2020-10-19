@@ -55,4 +55,8 @@ export class TokenService {
     return this.isValid();
   }
 
+  public getToken(): any {
+    return localStorage.getItem('token');
+  }
+
 }

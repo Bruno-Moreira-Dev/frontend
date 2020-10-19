@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { JarwisService } from 'src/app/Services/jarwis.service';
-import { TokenService } from 'src/app/Services/token.service';
-import { AuthService } from 'src/app/Services/auth.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-response-reset',
@@ -21,9 +20,8 @@ export class ResponseResetComponent implements OnInit {
 
   constructor(
     private Jarwis: JarwisService,
-    private Token: TokenService,
-    private Auth: AuthService,
-    private router: Router
+    private router: Router,
+    private Notify: SnotifyService
   ) { }
 
   ngOnInit(): void {
@@ -37,13 +35,25 @@ export class ResponseResetComponent implements OnInit {
   }
 
   public handleResponse(data: any): any {
-    this.Token.handle(data.access_token);
-    this.Auth.changeAuthStatus(true);
-    this.router.navigateByUrl('');
+
+    const routerMessage = this.router;
+    this.Notify.confirm('Feito!', 'Agora realize o login com a nova senha.', {
+      buttons: [
+        {
+          text: 'Ok',
+          action: toster => {
+            routerMessage.navigateByUrl('/login'),
+              this.Notify.remove(toster.id);
+          }
+        },
+      ]
+    });
+
+    // this.router.navigateByUrl('/login');
   }
 
   public handleError(error: any): any {
-    this.error = error.error.error;
+    this.error = error.error.errors;
   }
 
 }
